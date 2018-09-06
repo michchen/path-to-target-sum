@@ -1,9 +1,3 @@
-// You are given a binary tree whose nodes all have integer values (both positive and negative).
-
-// Given some target sum (say, 14), return true if there is
-// any path starting from the root and ending in a leaf
-// such that adding up all the values along the path equals the given sum.
-
 const hasPathToSum = function(node, targetSum) {
   if (
     node === undefined ||
@@ -18,11 +12,7 @@ const hasPathToSum = function(node, targetSum) {
       return found;
     }
     if (curNode.left === undefined && curNode.right === undefined) {
-      // console.log(
-      //   `found leaf. does curSum (${curSum}) === target (${targetSum})?`
-      // );
       if (curSum === targetSum) {
-        // console.log("-------------found-------------");
         found = true;
       }
     }
@@ -77,24 +67,10 @@ node0.addRight(node2);
 node2.addLeft(node1);
 node2.addRight(node3);
 
-console.log(
-  `${hasPathToSum(node0, -5)} should equal true: sum found (negative)`
-);
-console.log(`${hasPathToSum(node0, 3)} should equal true: sum found`);
-console.log(
-  `${hasPathToSum(node0, 0)} should equal false: sum not found (zero)`
-);
-console.log(
-  `${hasPathToSum(
-    node0,
-    -1.7
-  )} should equal false: sum not found (negative decimal)`
-);
-console.log(`${hasPathToSum(node0)} should equal false: no targetSum defined`);
-console.log(
-  `${hasPathToSum()} should equal false: no node nor targetSum defined`
-);
-
-console.log(
-  `${hasPathToSum(node0, "hi")} should equal false: targetSum is not a number`
-);
+console.log(`hasPathToSum(node0, -5): sum found, negative\n[${hasPathToSum(node0,-5)}] should equal [true]`);
+console.log(`hasPathToSum(node0, 3): sum found\n[${hasPathToSum(node0,3)}] should equal [true]`);
+console.log(`hasPathToSum(node0, 0): sum not found, zero\n[${hasPathToSum(node0,0)}] should equal [false]`);
+console.log(`hasPathToSum(node0,-1.7): sum not found, negative decimal\n[${hasPathToSum(node0,-1.7)}] should equal [false]`);
+console.log(`hasPathToSum(node0): no targetSum defined\n[${hasPathToSum(node0)}] should equal [false]`);
+console.log(`hasPathToSum(): no node nor targetSum defined\n[${hasPathToSum()}] should equal [false]`);
+console.log(`hasPathToSum(node0, "hi"): targetSum is not a number\n[${hasPathToSum(node0,"hi")}] should equal [false]`);
