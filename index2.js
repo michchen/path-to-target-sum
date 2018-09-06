@@ -9,9 +9,21 @@ const hasPathToSum = function(node, targetSum) {
 
   let recurse = function(curNode, curSum) {
     console.log("---recurse");
+
+    /*
+    has left node?
+      add to sum
+      recurse on left node
+    has right node?
+      add to sum
+      recurse on right node
+    check sum === targetSum
+
+    */
   };
 
-  recurse(node, 0);
+  // curSum starts as value of node
+  recurse(node, node.value);
 };
 
 class Tree {
