@@ -7,23 +7,46 @@
 const hasPathToSum = function(node, targetSum) {
   // console.log(node, targetSum);
 
-  let recurse = function(curNode, curSum) {
-    console.log("---recurse");
+  let recurse = function(curNode, curSum, found) {
+    // console.log("---recurse");
 
-    /*
-    has left node?
-      add to sum
-      recurse on left node
-    has right node?
-      add to sum
-      recurse on right node
-    check sum === targetSum
+    if (curNode.left === undefined && curNode.right === undefined) {
+      console.log(
+        `(${
+          curNode.value
+        }) is a leaf. does curSum (${curSum}) === target (${targetSum})?`
+      );
+      if (curSum === targetSum) {
+        console.log("-------------found-------------");
+        found = true;
+      }
+    }
 
-    */
+    // has left node?
+    if (curNode.left !== undefined) {
+      //   add to sum
+      // curSum += curNode.left.value;
+      console.log(`curSum + ${curNode.left.value} = ${curSum}`);
+      //   recurse on left node
+      found = recurse(curNode.left, curSum + curNode.left.value, found);
+    }
+    // has right node?
+    if (curNode.right !== undefined) {
+      //   add to sum
+      // curSum += curNode.right.value;
+      console.log(`curSum + ${curNode.right.value} = ${curSum}`);
+      //   recurse on right node
+      found = recurse(curNode.right, curSum + curNode.right.value, found);
+    }
+    return found;
+
+    // check sum === targetSum
   };
 
   // curSum starts as value of node
-  recurse(node, node.value);
+  var res = recurse(node, node.value, false);
+  // console.log(res);
+  return res;
 };
 
 class Tree {
@@ -32,14 +55,14 @@ class Tree {
   }
   addLeft(node) {
     if (typeof node === "object") {
-      this.leftChild = node;
+      this.left = node;
     }
     return this;
   }
 
   addRight(node) {
     if (typeof node === "object") {
-      this.rightChild = node;
+      this.right = node;
     }
     return this;
   }
@@ -63,3 +86,6 @@ node0.addRight(node2);
 
 node2.addLeft(node1);
 node2.addRight(node3);
+
+var result = hasPathToSum(node0, -5);
+console.log(`RESULT = ${result}`);
